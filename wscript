@@ -41,7 +41,7 @@ def configure(conf):
 
 	# check for libev
 	conf.check(lib='ev', uselib_store='ev', mandatory=True)
-	conf.check(header_name='ev.h', uselib='ev', mandatory=True)
+	#conf.check(header_name='ev.h', uselib='ev', mandatory=True)
 
 	# check for libpthread
 	conf.check(lib='pthread', uselib_store='pthread', mandatory=True)
@@ -62,7 +62,7 @@ def build(bld):
 		features = 'cc cprogram',
 		source = ['src/client.c', 'src/weighttp.c', 'src/worker.c'],
 		defines = ['HAVE_CONFIG_H=1', 'VERSION="' + VERSION + '"'],
-		includes = '.',
+		includes = ['.', '/usr/include/libev/'],
 		uselib = 'ev pthread',
 		target = 'weighttp'
 	)
